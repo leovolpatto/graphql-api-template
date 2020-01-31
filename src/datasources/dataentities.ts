@@ -17,7 +17,7 @@ export class DataentitiesAPI extends RESTDataSource {
         const response = await this.get('DS/search?_fields=_all'+this.SORT, undefined, {
             headers: {
                 'Content-Type': 'application/json',
-                //'Accept': 'application/vnd.vtex.ds.v10+json',
+
                 }
         });
         return Array.isArray(response) ?
@@ -33,7 +33,7 @@ export class DataentitiesAPI extends RESTDataSource {
         const response = await this.get('DA/search?_fields=_all'+this.SORT, undefined, {
             headers: {
                 'Content-Type': 'application/json',
-                //'Accept': 'application/vnd.vtex.ds.v10+json',
+
                 'REST-Range': 'resources=0-100'
             }
         });
