@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "lib": [
+      "es6",
+      "esnext",
+      "es2015",
+      "dom"
+    ],
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@modules/*": [
+        "./modules/*"
+      ]
+    },
+    "types": []
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "files": [
+    "src/index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    ".git"
+  ]
+}

@@ -1,0 +1,32 @@
+type Query{
+    """Lista de designs assinados"""
+    getSignedDesigns: [SignedDesign]
+    """Lista de designers"""
+    getDesigners: [Designer]
+}
+
+type SignedDesign{
+    fullPageBanner: String,
+    featuredCollection: Boolean,
+    collectionDescription: String,
+    collectionImage: String,
+    shelfImages: [String],
+    metatagDescription: String,
+    designerName: String,
+    visualizationOrder: Int,
+    collectionQuery: String,
+    pageTitle: String,
+    mobileFullPageBanner: String,
+    videoThumbnailUrl: String,
+    videoUrl: String
+}
+
+type Designer{
+    id: String,
+    description: String,
+    image: String,
+    name: String,
+    targetUrl: String,
+    collectionId: String,
+    bannerUrl: String
+}
