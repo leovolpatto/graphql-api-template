@@ -8,6 +8,8 @@ import * as fed from '@apollo/federation';
 import * as schema from './schema.graphql';
 import {ApolloServer} from 'apollo-server-express';
 import { GraphQLModule } from '@graphql-modules/core';
+import { DataentitiesAPI } from './datasources/dataentities';
+import resolvers from './resolvers';
 
 const app = express();
 app.use('*', cors());
@@ -22,7 +24,9 @@ app.get('/test', function (req: any, res: any) {
 
 const fSchema = fed.buildFederatedSchema(schema);
 const MyGraphQLModule = new GraphQLModule({
-  typeDefs: fSchema
+  typeDefs: fSchema,
+  resolvers: resolvers,
+  providers: [DataentitiesAPI]
 });
 const server = new ApolloServer({
   schema: MyGraphQLModule.schema,

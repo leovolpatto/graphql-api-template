@@ -1,32 +1,127 @@
-type Query{
-    """Lista de designs assinados"""
-    getSignedDesigns: [SignedDesign]
-    """Lista de designers"""
-    getDesigners: [Designer]
+#Queries
+type Query {
+  getDesigners(
+    filter: DesignerFilterInput
+    """
+    The number of results to show. Must be >= 1. Default = 20
+    """
+    pageSize: Int
+    """
+    If you add a cursor here, it will only return results _after_ this cursor
+    """
+    page: Int
+  ): DesignerConnection!
+  getSignedDesigns(
+    filter: SignedDesignFilterInput
+    """
+    The number of results to show. Must be >= 1. Default = 20
+    """
+    pageSize: Int
+    """
+    If you add a cursor here, it will only return results _after_ this cursor
+    """
+    page: Int
+    sort: Sort
+  ): SignedDesignConnection!
 }
 
-type SignedDesign{
-    fullPageBanner: String,
-    featuredCollection: Boolean,
-    collectionDescription: String,
-    collectionImage: String,
-    shelfImages: [String],
-    metatagDescription: String,
-    designerName: String,
-    visualizationOrder: Int,
-    collectionQuery: String,
-    pageTitle: String,
-    mobileFullPageBanner: String,
-    videoThumbnailUrl: String,
-    videoUrl: String
+input Sort{ 
+  sortBy: String!
+  direction: SortDirection = ASC
 }
 
+enum SortDirection{
+  ASC
+  DESC
+}
+
+#Types
 type Designer{
-    id: String,
-    description: String,
-    image: String,
-    name: String,
-    targetUrl: String,
-    collectionId: String,
-    bannerUrl: String
+  id: String
+  description: String
+  image: String
+  name: String
+  targetUrl: String
+  collectionId: String
+  bannerUrl: String
+}
+type SignedDesign {
+  id: String
+  fullPageBanner: String
+  mobileFullPageBanner: String
+  collectionIsFeatured: Boolean
+  collectionDescription: String
+  collectionImage: String
+  collectionName: String
+  collectionQuery: String
+  shelfImages: String
+  videoThumbnailUrl: String
+  videoUrl: String
+  metatagDescription: String
+  designerName: String
+  visualizationOrder: Int
+  pageTitle: String
+}
+
+#Pagination
+type DesignerConnection {
+  designer: [Designer]!
+  hasMore: Boolean!
+}
+type SignedDesignConnection {
+  listSignedDesign: [SignedDesign]!
+  hasMore: Boolean!
+}
+
+#FilterableFields
+input DesignerFilterInput {
+  id: StringFilterInput
+  name: StringFilterInput
+}
+input SignedDesignFilterInput {
+  id: StringFilterInput
+  featuredCollection: BooleanFilterInput
+  collectionName: StringFilterInput
+  designerName: StringFilterInput
+  visualizationOrder: IntFilterInput
+}
+
+#Filters
+input StringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+input BooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+input FloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+input IntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
 }
